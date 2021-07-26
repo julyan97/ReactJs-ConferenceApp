@@ -13,7 +13,12 @@ export default class ConferenceService
     }
 
     static conferences = async () => {
-        const res = http.get("http://localhost:5000/api/Conference")
+        const res = http.get("http://localhost:5000/api/Conference/all")
+        return (await res).data
+    }
+
+    static myConferences = async (email:string) => {
+        const res = http.get(`http://localhost:5000/api/Conference/getByEmail?email=${email}`,)
         return (await res).data
     }
 
@@ -27,6 +32,22 @@ export default class ConferenceService
                 time
             })
         })
+        
+        return res;
+    }
+
+    static createByEmail = async (name:string,date:string,time:string,email:string)=> {
+        const res = await fetch(`http://localhost:5000/api/Conference/addByEmail`,{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({
+                email,
+                name,
+                date,
+                time
+            })
+        })
+        
         return res;
     }
 }

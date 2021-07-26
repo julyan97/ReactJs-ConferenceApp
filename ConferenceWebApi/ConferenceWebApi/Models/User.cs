@@ -11,6 +11,6 @@ namespace ConferenceWebApi.Models
         public string Email { get; set; }
         public string Password { get; set; }
 
-        public List<Conference> Conferences { get; set; }
+        public List<Conference> Conferences { get; set; } = new List<Conference>();
     }
 }

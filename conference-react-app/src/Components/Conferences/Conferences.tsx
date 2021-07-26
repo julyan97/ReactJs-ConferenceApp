@@ -20,15 +20,18 @@ export const ConferencesHookWithAxios = () => {
 
     const auth = useContext(AuthContext)
     useEffect(() => {
-
-        ConferenceService.conferences()
-            .then(
-                res => {
-                    console.log(res)
-                    let temp = (res as Array<IConference>).map(x => <Conference conference={x} />);
-                    setArr(temp)
-                })
-    }, [])
+        //(code)() for async
+        (async () => {
+            await ConferenceService.conferences()
+                .then(
+                    res => {
+                        console.log(res)
+                        let temp = (res as Array<IConference>).map((x, index) => <Conference key={index} conference={x} />);
+                        setArr(temp)
+                    })
+        })()
+    },[])
+    
 
     return (
         <div>

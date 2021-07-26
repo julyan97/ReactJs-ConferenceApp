@@ -8,6 +8,7 @@ import { Navigation } from './Components/Navigation/Naviation';
 import { Login } from './Components/Login/Login';
 import { Register } from './Components/Register/Register';
 import { AuthContext } from './Contexts';
+import { MyConferences } from './Components/MyConferences/MyConferences';
 
 
 const App = () => {
@@ -21,9 +22,11 @@ const App = () => {
           <Navigation name={email} setName={setEmail} />
           <Route path="/" exact component={() => <ConferencesHookWithAxios />} />
           <Route path="/createConference" exact component={() => <CreateConference />} />
+          <Route path="/myConferences" component={() => <MyConferences email = {email}/>} />
           {
             !email?
             <Fragment>
+              
               <Route path="/login" exact component={() => <Login />} />
               <Route path="/register" exact component={() => <Register />} />
             </Fragment>

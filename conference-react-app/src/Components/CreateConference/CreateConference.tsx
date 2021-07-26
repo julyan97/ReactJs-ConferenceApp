@@ -1,5 +1,6 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useContext, useState } from 'react'
 import { Redirect } from 'react-router-dom';
+import { AuthContext } from '../../Contexts';
 import ConferenceService from '../../Services/ConferenceService';
 import "../../static/css/site.css"
 import { Navigation } from '../Navigation/Naviation'
@@ -9,13 +10,18 @@ export const CreateConference = () => {
     const [date, setDate] = useState("");
     const [time, setTime] = useState("");
     const [redirect, setRedirect] = useState(false);
+
+    const auth = useContext(AuthContext)
+
     const submit = async () =>
     {
-        const res = await ConferenceService.create(name,date,time);
-        setRedirect(true);
-        
+        setRedirect(true)
+        if(auth.email)await ConferenceService.createByEmail(name,date,time,auth.email);
+        else await ConferenceService.create(name,date,time);
     }
-    if(redirect) window.location.href = "/"; // need to be <Redirect to=''/>
+    console.log(redirect);
+    if(redirect) return <Redirect to='/'/> //first way
+   // if(redirect) window.location.href = "/"; // second way
     return (
         <Fragment>
             <div className="center">

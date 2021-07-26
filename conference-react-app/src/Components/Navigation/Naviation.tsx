@@ -50,6 +50,9 @@ export const Navigation = (props: any) => {
                                 <li className="nav-item">
                                     <label  className="nav-link font-weight-bold" style={{color:"green"}} >hi: {authenticated}</label>
                                 </li> : null}
+                                <li className="nav-item">
+                                <Link to="/myConferences" className="nav-link text-dark" >MyConferences</Link>
+                            </li>
                             {!authenticated ?
                                 <Fragment >
                                     <li className="nav-item">
